@@ -2,9 +2,18 @@
   <div class="wrapper">
     <div class="col-1">
       <input v-model="number" type="number" />
+      <button @click="ok">ok</button>
     </div>
-    <div class="col-2">b</div>
-    <div class="col-3">c</div>
+    <div class="col-2">
+      {{ number }}
+      // ans = {{ ans }}
+    </div>
+    <div class="col-3">
+      c
+      <pre>
+      {{ temp }}
+      </pre>
+    </div>
   </div>
 </template>
 
@@ -17,20 +26,45 @@ export default {
   data() {
     return {
       number: "",
+      ans: false,
+      temp: [],
     };
   },
-  watch: {
-    number(value) {
-      if (value) {
-        value = 1;
-        console.log({ value });
+  watch: {},
+  mounted() {
+    this.temp[1] = "true";
+  },
+  methods: {
+    ok() {},
+    isPrime(n, i = 2) {
+      const max = n - 1;
+      if (n === 2 || n === 1) {
+        return true;
+      }
+      if (i === max) {
+        return true;
+      }
+      if (n % i === 0) {
+        return false;
+      } else {
+        i = i + 1;
+        return this.isPrime(n, i);
+      }
+    },
+    isFibo(n, current = 1, prev = 1) {
+      const sum = current + prev;
+      prev = current;
+      if (current === n) {
+        return true;
+      } else if (current > n) {
+        return false;
+      } else {
+        return this.isFibo(n, sum, prev);
       }
     },
   },
 };
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 html,
 body {
