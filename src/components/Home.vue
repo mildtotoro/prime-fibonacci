@@ -40,8 +40,6 @@ export default {
       }
     },
     isPrime(n, i = 2) {
-      console.log("isPrime");
-
       const max = n - 1;
       if (n === 2 || n === 1) {
         return true;
@@ -57,7 +55,6 @@ export default {
       }
     },
     isFibonacci(n, current = 1, prev = 0) {
-      console.log("isFibonacci");
       const sum = current + prev;
       if (current == n || prev == n) {
         return true;
