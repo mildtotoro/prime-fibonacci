@@ -1,10 +1,10 @@
 <template>
   <div class="wrapper">
     <div class="col-1">
-      <input v-on:keyup.enter="ok" v-model="number" type="number" />
+      <input v-on:change="ok" v-model="number" type="number" />
     </div>
     <div class="col-2">
-      <select name="work" v-model="work">
+      <select v-on:change="ok" name="work" v-model="work">
         <option value="isPrime">isPrime</option>
         <option value="isFibo">isFibo</option>
       </select>
@@ -27,17 +27,21 @@ export default {
   },
   methods: {
     ok() {
-      if (this.number < 0) {
-        this.number = 1;
-      }
-      this.number = parseInt(this.number);
-      if (this.work === "isPrime") {
-        this.ans = this.isPrime(this.number);
-      } else {
-        this.ans = this.isFibonacci(this.number);
+      if (this.number !== "") {
+        if (this.number < 0) {
+          this.number = 1;
+        }
+        this.number = parseInt(this.number);
+        if (this.work === "isPrime") {
+          this.ans = this.isPrime(this.number);
+        } else {
+          this.ans = this.isFibonacci(this.number);
+        }
       }
     },
     isPrime(n, i = 2) {
+      console.log("isPrime");
+
       const max = n - 1;
       if (n === 2 || n === 1) {
         return true;
@@ -53,6 +57,7 @@ export default {
       }
     },
     isFibonacci(n, current = 1, prev = 0) {
+      console.log("isFibonacci");
       const sum = current + prev;
       if (current == n || prev == n) {
         return true;
