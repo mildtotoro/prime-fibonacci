@@ -30,16 +30,17 @@ export default {
   mounted() {},
   methods: {
     ok() {
+      if (this.number < 0) {
+        this.number = 1;
+      }
+      this.number = parseInt(this.number);
       if (this.work === "isPrime") {
         this.ans = this.isPrime(this.number);
-        //console.log({ dd });
       } else {
         this.ans = this.isFibonacci(this.number);
-        //console.log({ kk });
       }
     },
     isPrime(n, i = 2) {
-      console.log("isPrime", n, i);
       const max = n - 1;
       if (n === 2 || n === 1) {
         return true;
@@ -55,9 +56,7 @@ export default {
       }
     },
     isFibonacci(n, current = 1, prev = 0) {
-      console.log(n, current, prev);
       const sum = current + prev;
-      //prev = current;
       if (current == n || prev == n) {
         return true;
       } else if (current > n) {
