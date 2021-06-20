@@ -22,12 +22,9 @@ export default {
     return {
       number: "",
       ans: false,
-      temp: [],
       work: "isPrime",
     };
   },
-  watch: {},
-  mounted() {},
   methods: {
     ok() {
       if (this.number < 0) {
