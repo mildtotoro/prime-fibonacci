@@ -1,42 +1,45 @@
 <template>
   <div class="wrapper">
     <div class="col-1">
-      <input v-model="number" type="number" />
-      <button @click="ok">ok</button>
+      <input v-on:keyup.enter="ok" v-model="number" type="number" />
     </div>
     <div class="col-2">
-      {{ number }}
-      // ans = {{ ans }}
+      <select name="work" v-model="work">
+        <option value="isPrime">isPrime</option>
+        <option value="isFibo">isFibo</option>
+      </select>
     </div>
     <div class="col-3">
-      c
-      <pre>
-      {{ temp }}
-      </pre>
+      {{ ans }}
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "HelloWorld",
-  props: {
-    msg: String,
-  },
+  name: "Home",
   data() {
     return {
       number: "",
       ans: false,
       temp: [],
+      work: "isPrime",
     };
   },
   watch: {},
-  mounted() {
-    this.temp[1] = "true";
-  },
+  mounted() {},
   methods: {
-    ok() {},
+    ok() {
+      if (this.work === "isPrime") {
+        this.ans = this.isPrime(this.number);
+        //console.log({ dd });
+      } else {
+        this.ans = this.isFibonacci(this.number);
+        //console.log({ kk });
+      }
+    },
     isPrime(n, i = 2) {
+      console.log("isPrime", n, i);
       const max = n - 1;
       if (n === 2 || n === 1) {
         return true;
@@ -51,48 +54,38 @@ export default {
         return this.isPrime(n, i);
       }
     },
-    isFibo(n, current = 1, prev = 1) {
+    isFibonacci(n, current = 1, prev = 0) {
+      console.log(n, current, prev);
       const sum = current + prev;
-      prev = current;
-      if (current === n) {
+      //prev = current;
+      if (current == n || prev == n) {
         return true;
       } else if (current > n) {
         return false;
       } else {
-        return this.isFibo(n, sum, prev);
+        prev = current;
+        return this.isFibonacci(n, sum, prev);
       }
     },
   },
 };
 </script>
 <style scoped>
-html,
-body {
-  overflow: hidden;
-  padding: 0px;
-  margin: 0px;
-}
-@media screen and (max-width: 600px) {
-  body {
-    overflow: scroll;
-  }
-}
-
 .wrapper {
   display: flex;
   height: 100vh;
   align-items: stretch;
 }
 .col-1 {
-  background-color: aquamarine;
   width: 200px;
+  border: 1px solid;
 }
 .col-2 {
-  background-color: bisque;
   flex-grow: 1;
+  border: 1px solid;
 }
 .col-3 {
-  background-color: coral;
   width: 300px;
+  border: 1px solid;
 }
 </style>
