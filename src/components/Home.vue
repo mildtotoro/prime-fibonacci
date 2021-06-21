@@ -1,10 +1,10 @@
 <template>
   <div class="wrapper">
     <div class="col-1">
-      <input v-on:change="ok" v-model="number" type="number" />
+      <input @change="ok" @input="ok" v-model="number" type="number" />
     </div>
     <div class="col-2">
-      <select v-on:change="ok" name="work" v-model="work">
+      <select @change="ok" name="work" v-model="work">
         <option value="isPrime">isPrime</option>
         <option value="isFibo">isFibo</option>
       </select>
